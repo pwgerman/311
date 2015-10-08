@@ -36,7 +36,9 @@ def predict(opendate, sup_dist=5):
     today = datetime.now()
     duration = delta2sec(today-opendate)
     model_mean = timedelta(days=33)
-    return dist_mean[sup_dist]
+#   return dist_mean[sup_dist]
+    return opendate + dist_mean[sup_dist]
+
 #    return sec2delta(duration)
 #    return model_mean
 
