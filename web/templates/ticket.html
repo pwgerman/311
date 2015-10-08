@@ -1,0 +1,5 @@
+{% extends "layout.html" %}
+{% block content %}
+  <p class="lead">Your ticket will probably be closed on:</p>
+  <h1>{{ completion_date.strftime('%Y-%m-%d') }}</h1>
+{% endblock %}
