@@ -1,5 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
-  <p class="lead">Your ticket will probably be closed on:</p>
-  <h1>{{ completion_date.strftime('%Y-%m-%d') }}</h1>
+  {% if prediction and closed %}
+    <p class="lead">Your ticket was <strong>closed</strong> on <strong>{{closed.date | datetime}}</strong>.</p>
+    <p class="lead">It took <strong>{{closed.time_open | timedelta}}</strong>, which is <strong>{{closed.difference | timedelta}} {{ closed.which }}</strong> than we predicted.</p>
+    <p>We predicted that the ticket would be closed on <strong>{{ prediction | datetime }}</strong>.
+  {% elif prediction %}
+    <p class="lead">Your ticket will probably be closed on:</p>
+    <h1>{{ prediction | datetime }}</h1>
+  {% else %}
+    <p class="lead">Your ticket with ID <strong>{{ case_id }}</strong> was not found.
+    <p>It's possible that you mistyped the ID.  Otherwise, the SF OpenData
+      <a href="https://data.sfgov.org/City-Infrastructure/Case-Data-from-San-Francisco-311-SF311-/vw6y-z8j6" target="_blank">dataset</a>
+      dataset is occasionally stale by a few hours or days, so please bookmark this page and check back later.  Sorry for the inconvenience!
+    </p>
+  {% endif %}
 {% endblock %}
