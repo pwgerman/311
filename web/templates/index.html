@@ -2,9 +2,12 @@
 {% block content %}
   <h1>San Francisco 311 Predictions</h1>
   <p class="lead">How long will your ticket take to complete?  Let us guess.</p>
-  <form class="form-search" action="/ticket" method="GET">
-    <label for="case_id">Ticket Number</label>
-    <input type="text" class="form-control input-lg" name="case_id">
-    <button type="submit" class="btn">Search</button>
+  <form action="/ticket" method="GET">
+    <div class="form-group">
+      <label for="case_id">Ticket Number</label>
+      <input type="text" class="form-control input-lg" size="10" name="case_id">
+      <span id="helpBlock" class="help-block">You should have received a case number from SF311 if you filed a ticket.  If you're interested in 311 predictions but don't have a case number to predict, check out our <a href="/browse">browse</a> page.</span>
+    </div>
+    <button type="submit" class="btn btn-lg btn-primary">Search</button>
   </form> 
 {% endblock %}

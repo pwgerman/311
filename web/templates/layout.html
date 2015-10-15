@@ -23,15 +23,65 @@
         <script src="static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">311</a>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">SF311Predictor</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#browse">Browse</a></li>
+            <li><a href="#howitworks">How it Works</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
-      <div class="main-content">
-       {% block content %}{% endblock %}
+      <div class="main-content row">
+        <div class="col-xs-12 col-md-6">
+          {% block content %}{% endblock %}
+        </div>
+        <div class="section col-xs-12 col-md-4 col-md-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3>What is San Francisco 311?</h2>
+              <p>The SF311 Customer Service Center provides toll-free 24x7 government information and services to San Francisco residents, visitors, and businesses.</p>
+              <p>Some of the services provided by 311 include:
+                <ul>
+                  <li>graffiti and street cleaning</li>
+                  <li>pothole repair</li>
+                  <li>filing a Muni complaint</li>
+                  <li>reporting lost or found items</li>
+                  <li>obtaining Muni route/schedule information</li>
+                  <li>reporting abandoned vehicles, illegal signs, and broken parking meters</li>
+                </ul>
+              </p>
+              <p>For more information, visit:<p>
+              <a href="http://www.sf311.org/" target="_blank">SF311</a><br>
+              <a href="http://mobile311.sfgov.org/" target="_blank">Mobile311</a><br>
+              <a href="https://data.sfgov.org/City-Infrastructure/Case-Data-from-San-Francisco-311-SF311-/vw6y-z8j6" target="_blank">SF OpenData</a>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3>How does the prediction work?</h2>
+              <p>These predictions use a multivariate logistic regression including the following factors:</p>
+              <ul>
+                <li>Supervisory district</li>
+              </ul>
+              For more information, visit the <a href="#howitworks">how it works</a> page.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
