@@ -5,6 +5,11 @@
 
 
 
+@media(max-width: 992px){
+  .section {
+    margin-top: 40px;
+  }
+}
 
 
 
