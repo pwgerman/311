@@ -1,9 +1,33 @@
 # Python 2.7 module for machine learning predictions for San Francisco 311
+"""Module Docstring
+Functions:  
+load_data()  
+save_data()
+process_timedelta()
+process_datetime()
+delta2sec()
+sec2delta()
+predict()
+
+Intended use in ipython:
+raw_data = '/Users/walter/Data/SF/Case_Data_from_San_Francisco_311__SF311_2015-10-13.csv'
+%time df = ml311.load_data(raw_data)
+import sys    # optional
+sys.stdout.flush()    #optional
+%time df = ml311.process_datetime(df)
+outputfilename = raw_data.strip('.cvs')+'proc.csv'
+ml311.save_data(df, outputfilename)
+# when reloading
+%time df = ml311.load_data(outputfilename)
+# when analyzing
+%time df = ml311.process_timedelta(df)
+"""
 
 from datetime import datetime, timedelta
 from pandas import Series, to_datetime, Timedelta
 import pandas as pd
 from time import sleep
+import sys
 
 dist_names = ['None', 'Richmond','Marina', 'North Beach to Market', 'Sunset', \
             'Panhandle', 'Soma to Tenderloin', 'West Portal to Merced', \
@@ -17,7 +41,8 @@ def load_data(filename):
     ## Loading a CSV file, without a header (so we have to provide field names)
     df = pd.read_csv(filename, index_col=0)  
 
-    # if 'Opened_dt in columns'
+    # if ml311.process_datetimes has already been and saved, then read as
+    # datetimes.
     if 'Opened_dt' in df.columns:
         df['Opened_dt']=pd.to_datetime(df['Opened_dt'])
     if 'Closed_dt' in df.columns:
@@ -62,21 +87,12 @@ def process_datetime(df):
     else:
         print 'Datetime efficient string not found. Processing: wait 10 min.'
         df['Opened_dt']= pd.to_datetime(df['Opened'])
-
+    sys.stdout.flush()    # display progress if %time
     if 'Closed_dt' in df.columns:
         df['Closed_dt']= pd.to_datetime(df['Closed_dt'])
     else:
         print 'Datetime efficient string not found. Processing: wait 10 min.'
         df['Closed_dt']= pd.to_datetime(df['Closed'])
-    # df['Case_Time'] = df['Closed_dt']-df['Opened_dt']
-    # df['Case_Sec'] = delta2sec(df['Case_Time'])
-
-    # # format for saving datetimes
-    # df['Opened_dt']= df['Opened_dt'].astype('str')
-    # df['Closed_dt']= df['Closed_dt'].astype('str')
-    # df['Case_Time']= df['Case_Time'].astype('str')
-
-    # df.to_csv(path_or_buf=newfilename)
     return df
 
 
