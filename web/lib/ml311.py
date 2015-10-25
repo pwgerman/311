@@ -39,7 +39,7 @@ def load_data(filename):
     Designed for either raw file from 311 or processed file with datetime
     converted."""
     ## Loading a CSV file, without a header (so we have to provide field names)
-    df = pd.read_csv(filename, index_col=0)  
+    df = pd.read_csv(filename, index_col=False)  
 
     # if ml311.process_datetimes has already been and saved, then read as
     # datetimes.
