@@ -93,6 +93,7 @@ def process_datetime(df):
     else:
         print 'Datetime efficient string not found. Processing: wait 10 min.'
         df['Closed_dt']= pd.to_datetime(df['Closed'])
+    # df['Updated_dt']= pd.to_datetime(df['Updated'])
     return df
 
 
@@ -102,8 +103,28 @@ def delta2sec(timedelta):
 
 def sec2delta(time_sec):
     """Convert time in seconds to timedelta"""
-    return timedelta(0, time_sec[0])
-                
+    try:
+        out = timedelta(0, time_sec[0])
+    except:
+        out = timedelta(0, time_sec)
+    return out
+
+def sec2days(time_sec):
+    """Returns the number of full days signified by time_sec number of seconds.
+    Less than 8 hours is counted as zero days. the first 8 hours counts as 1 day.
+    Each addtional 24 hours adds an additional day."""
+    try: 
+        time_sec = int(time_sec)
+    except:
+        return time_sec
+    out = sec2delta(time_sec).days
+    seconds = sec2delta(time_sec).seconds
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    if hours >= 8:
+        out = out + 1  # add extra day if 8 hours on top of full days
+    return out      
+
 dist_mean = {0: Timedelta('43 days 10:05:11.056561'),
     1: Timedelta('31 days 03:01:06.400110'),
     2: Timedelta('35 days 18:07:55.616361'),
