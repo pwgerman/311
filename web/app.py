@@ -15,6 +15,10 @@ app.jinja_env.filters['timedelta'] = filters.timedelta
 def root():
     return render_template('index.html');
 
+@app.route('/about')
+def about():
+    return render_template('about.html');
+
 @app.route('/ticket')
 def get_ticket():
     case_id = request.args.get('case_id')
