@@ -47,8 +47,16 @@
     </nav>
 
     <div class="container">
+<<<<<<< HEAD
+      <div class="bump-down row">
+        <div class="col-xs-12 col-md-7">
+||||||| merged common ancestors
+      <div class="main-content row">
+        <div class="col-xs-12 col-md-6">
+=======
       <div class="main-content row">
         <div class="col-xs-12 col-md-7">
+>>>>>>> master
           {% block content %}{% endblock %}
         </div>
         <div class="section col-xs-12 col-md-4 col-md-offset-1">
