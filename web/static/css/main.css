@@ -2,8 +2,10 @@
   margin-top: 40px;
 }
 
-
-
+.content-block {
+	padding-bottom: 30px;
+	border-bottom: 1px solid black;
+}
 
 @media(max-width: 992px){
   .section {

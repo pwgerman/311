@@ -19,6 +19,10 @@ def root():
 def about():
     return render_template('about.html');
 
+@app.route('/insights')
+def get_insight():
+    return render_template('insights.html');
+
 @app.route('/ticket')
 def get_ticket():
     case_id = request.args.get('case_id')
