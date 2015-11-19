@@ -1,11 +1,15 @@
-.main-content {
-  padding: 40px 0;
+.bump-down {
+  margin-top: 40px;
 }
-
 
 .content-block {
 	padding-bottom: 30px;
 	border-bottom: 1px solid black;
+}
+
+.greyscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
 @media(max-width: 992px){
