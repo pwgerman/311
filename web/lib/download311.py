@@ -22,7 +22,6 @@ def append2filename(filename, add=None):
     basename = filename.split('.')[0]
     extname = filename.split('.')[1:]
     fullname = basename + add + '.' + ''.join(extname)
-    print fullname
     return fullname
 
 def download(url, fileName=None):
@@ -32,7 +31,6 @@ def download(url, fileName=None):
             cd = dict(map(
                 lambda x: x.strip().split('=') if '=' in x else (x.strip(),''),
                 openUrl.info()['Content-Disposition'].split(';')))
-            pdb.set_trace()  # (Pdb) p openUrl.info().headers
             if 'filename' in cd:
                 filename = cd['filename'].strip("\"'")
                 if filename:   #return filename
@@ -56,19 +54,23 @@ def download(url, fileName=None):
     pdb.set_trace()  # (Pdb) p r.info().headers
     try:
         fileName = fileName or getFileName(url,r)
-        pdb.set_trace() # (Pdb) p fileName
+        print fileName
+        # if fileName already exists:
         with open(fileName, 'wb') as f:
             shutil.copyfileobj(r,f)  # automatically buffers downloads of very large files
+        # else print "File by that name already exists."
     finally:
         r.close()
 
 
 if __name__ == "__main__":
 
-    download(url = "https://i.imgur.com/G0IKECz.jpg")
-# download(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv')
     # url = "https://i.imgur.com/G0IKECz.jpg"
-    # url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv'
+    url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv'
+    download(url=url)
+    # download(url = "https://i.imgur.com/G0IKECz.jpg")
+    # download(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv')
+
 
 # TO DO
 
