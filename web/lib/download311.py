@@ -62,7 +62,10 @@ def download(url, fileName=None):
     finally:
         r.close()
 
-download(url = "https://i.imgur.com/G0IKECz.jpg")
+
+if __name__ == "__main__":
+
+    download(url = "https://i.imgur.com/G0IKECz.jpg")
 # download(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv')
     # url = "https://i.imgur.com/G0IKECz.jpg"
     # url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv'
