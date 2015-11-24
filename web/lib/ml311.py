@@ -33,11 +33,6 @@ dist_names = ['None', 'Richmond','Marina', 'North Beach to Market', 'Sunset', \
             'Panhandle', 'Soma to Tenderloin', 'West Portal to Merced', \
             'Noe Valley', 'Mission to Bernal', 'Bay View', 'Excelsior']
 
-def download_csv(url, savefilename):
-    """Downsloads csv file of 311 case data from SF server.  Arguments are
-    URL of file and path/filename for locally saving the file."""
-    pass
-
 def load_data(filename):
     """load a saved datafile with datetime conversion for times
     RETURNS a pandas DataFrame of the csv file from 311.
