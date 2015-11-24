@@ -23,6 +23,17 @@ def load_new_data(rawdata_filename, procdata_filename):
     print str(time.time()-t0) + ' seconds elapsed'
     return df
 
+def load_proc_data(procdata_filename):
+    """Opens a processed SF 311 datafile (previously opened with load_new_data)
+    and returns the pandas DataFrame."""
+    print 'This may take a few minutes to load'
+    t0 = time.time()
+    df = ml311.load_data(procdata_filename)
+    print str(time.time()-t0) + ' seconds elapsed'
+    t0 = time.time()
+    df = ml311.process_timedelta(df)
+    print str(time.time()-t0) + ' seconds elapsed'
+    return df
 
 if __name__ == "__main__":
 	rawdata_filename = '/Users/walter/Data/SF/Case_Data_from_San_Francisco_311__SF311_2015-10-22.csv'
