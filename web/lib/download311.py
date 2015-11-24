@@ -11,7 +11,7 @@ import datetime
 def download_csv(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv', savefilename="urllib_test.csv"):
     """Downsloads csv file of 311 case data from SF server.  Arguments are
     URL of file and path/filename for locally saving the file."""
-    urllib.urlretrieve()
+    urllib.urlretrieve(url, savefilename)
 
 # https://stackoverflow.com/questions/862173/how-to-download-a-file-using-python-in-a-smarter-way
 def append2filename(filename, add=None):
@@ -25,7 +25,9 @@ def append2filename(filename, add=None):
     return fullname
 
 def download(url, fileName=None):
+    """Downloads URL to local destination filename."""
     def getFileName(url,openUrl):
+        """Returns filename based on URL response headers."""
         if 'Content-Disposition' in openUrl.info():
             # If the response has Content-Disposition, try to get filename from it
             cd = dict(map(
