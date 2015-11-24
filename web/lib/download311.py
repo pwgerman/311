@@ -3,6 +3,9 @@
 import pdb
 
 import urllib2
+import shutil
+import urlparse
+import os
 
 def download_csv(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv', savefilename):
     """Downsloads csv file of 311 case data from SF server.  Arguments are
@@ -39,5 +42,39 @@ def download_url(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv', as_f
 
     f.close()
 
-download_url()
+# download_url()
 # download_url(url="https://i.imgur.com/G0IKECz.jpg")
+
+
+# https://stackoverflow.com/questions/862173/how-to-download-a-file-using-python-in-a-smarter-way
+
+def download(url, fileName=None):
+    def getFileName(url,openUrl):
+        if 'Content-Disposition' in openUrl.info():
+            # If the response has Content-Disposition, try to get filename from it
+            cd = dict(map(
+                lambda x: x.strip().split('=') if '=' in x else (x.strip(),''),
+                openUrl.info()['Content-Disposition'].split(';')))
+            if 'filename' in cd:
+                filename = cd['filename'].strip("\"'")
+                if filename:   #return filename
+                    return filename
+        # if no filename was found above, parse it out of the final URL.
+        filename = os.path.basename(urlparse.urlsplit(openUrl.url)[2])
+        return (filename)
+
+    r = urllib2.urlopen(urllib2.Request(url))
+    pdb.set_trace()  # (Pdb) p r.info().headers
+    try:
+        fileName = fileName or getFileName(url,r)
+        with open(fileName, 'wb') as f:
+            shutil.copyfileobj(r,f)  # automatically buffers downloads of very large files
+    finally:
+        r.close()
+
+download(url = "https://i.imgur.com/G0IKECz.jpg")
+# download(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv')
+    # url = "https://i.imgur.com/G0IKECz.jpg"
+    # url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv'
+
+
