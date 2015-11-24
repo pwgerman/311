@@ -55,6 +55,7 @@ def download(url, fileName=None):
             cd = dict(map(
                 lambda x: x.strip().split('=') if '=' in x else (x.strip(),''),
                 openUrl.info()['Content-Disposition'].split(';')))
+            pdb.set_trace()  # (Pdb) p openUrl.info().headers
             if 'filename' in cd:
                 filename = cd['filename'].strip("\"'")
                 if filename:   #return filename
@@ -67,6 +68,7 @@ def download(url, fileName=None):
     pdb.set_trace()  # (Pdb) p r.info().headers
     try:
         fileName = fileName or getFileName(url,r)
+        pdb.set_trace() # (Pdb) p fileName
         with open(fileName, 'wb') as f:
             shutil.copyfileobj(r,f)  # automatically buffers downloads of very large files
     finally:
