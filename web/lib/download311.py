@@ -70,17 +70,12 @@ if __name__ == "__main__":
     # url = "https://i.imgur.com/G0IKECz.jpg"
     # url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv'
 
-# append2filename(filename='This_is_a_name.csv')
-
-# import datetime
-    # datetime.datetime.now().strftime('%Y-%m-%d')  # add to filename string
-
-
-# mod = r.info().getheader('Last-Modified')
-# 'Mon, 23 Nov 2015 10:02:55 PST'
-# datetime.datetime.strptime(mod, '%a, %d %b %Y %X %Z')
+# TO DO
 
 # # check if file already exists before downloading again
 # import os.path
 # os.path.isfile(fname) 
+
+# Create menu for 'main' that lets choose to see if up to date or download 311 or something custom.
+
 
