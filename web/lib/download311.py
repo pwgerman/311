@@ -6,6 +6,7 @@ import urllib2
 import shutil
 import urlparse
 import os
+import datetime
 
 def download_csv(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv', savefilename):
     """Downsloads csv file of 311 case data from SF server.  Arguments are
@@ -47,6 +48,16 @@ def download_url(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv', as_f
 
 
 # https://stackoverflow.com/questions/862173/how-to-download-a-file-using-python-in-a-smarter-way
+def append2filename(filename, add=None):
+    """Appends extra string to end of filename, before the first 'dot' extension.
+    If no second arguement given, the current date is appended."""
+    if add==None:
+        add = datetime.datetime.now().strftime('%Y-%m-%d')
+    basename = filename.split('.')[0]
+    extname = filename.split('.')[1:]
+    fullname = basename + add + '.' + ''.join(extname)
+    print fullname
+    return fullname
 
 def download(url, fileName=None):
     def getFileName(url,openUrl):
@@ -59,10 +70,11 @@ def download(url, fileName=None):
             if 'filename' in cd:
                 filename = cd['filename'].strip("\"'")
                 if filename:   #return filename
+                    filename = append2filename(filename)
                     return filename
         # if no filename was found above, parse it out of the final URL.
         filename = os.path.basename(urlparse.urlsplit(openUrl.url)[2])
-        return (filename)
+        return append2filename(filename)
 
     r = urllib2.urlopen(urllib2.Request(url))
     pdb.set_trace()  # (Pdb) p r.info().headers
