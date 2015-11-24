@@ -70,7 +70,13 @@ def download(url, fileName=None):
             if 'filename' in cd:
                 filename = cd['filename'].strip("\"'")
                 if filename:   #return filename
-                    filename = append2filename(filename)
+                    if 'Last-Modified' in openUrl.info(): 
+                        mod = openUrl.info()['Last-Modified']
+                        mod_dt = datetime.datetime.strptime(mod, '%a, %d %b %Y %X %Z')
+                        mod_name = datetime.datetime.strftime(mod_dt, '%Y%m%d-%H%M')
+                        filename = append2filename(filename, add=mod_name)
+                    else:
+                        filename = append2filename(filename)
                     return filename
         # if no filename was found above, parse it out of the final URL.
         filename = os.path.basename(urlparse.urlsplit(openUrl.url)[2])
@@ -90,5 +96,15 @@ download(url = "https://i.imgur.com/G0IKECz.jpg")
 # download(url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv')
     # url = "https://i.imgur.com/G0IKECz.jpg"
     # url='https://data.sfgov.org/api/views/vw6y-z8j6/rows.csv'
+
+# append2filename(filename='This_is_a_name.csv')
+
+# import datetime
+    # datetime.datetime.now().strftime('%Y-%m-%d')  # add to filename string
+
+
+# mod = r.info().getheader('Last-Modified')
+# 'Mon, 23 Nov 2015 10:02:55 PST'
+# datetime.datetime.strptime(mod, '%a, %d %b %Y %X %Z')
 
 
