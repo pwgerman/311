@@ -111,4 +111,7 @@ download(url = "https://i.imgur.com/G0IKECz.jpg")
 # 'Mon, 23 Nov 2015 10:02:55 PST'
 # datetime.datetime.strptime(mod, '%a, %d %b %Y %X %Z')
 
+# # check if file already exists before downloading again
+# import os.path
+# os.path.isfile(fname) 
 
