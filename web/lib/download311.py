@@ -76,10 +76,14 @@ def download(url, fileName=None):
                         mod_name = datetime.datetime.strftime(mod_dt, '%Y%m%d-%H%M')
                         filename = append2filename(filename, add=mod_name)
                     else:
+                        print "'Last-Modified' datetime not in URL header."
+                        print "Todays date added to filename."
                         filename = append2filename(filename)
                     return filename
         # if no filename was found above, parse it out of the final URL.
         filename = os.path.basename(urlparse.urlsplit(openUrl.url)[2])
+        print "'Content-Disposition' not in URL header."
+        print "Today's date added to URL for filename."
         return append2filename(filename)
 
     r = urllib2.urlopen(urllib2.Request(url))
