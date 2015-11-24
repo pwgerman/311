@@ -1,7 +1,14 @@
 # python 2.7
+"""Process SF 311 Datafiles.
+make_proc_filename  Creates new filename for processed datafile
+load_new_data  Begins processing a newly downloaded datafile
+load_proc_data  Faster loading of datafiles that have already received
+initial processing.
+Additional argument from shell command line initiates script with rawdata_filename
+$ python process311.py <rawdata_filename>"""
 
 import ml311
-
+import sys
 
 def make_proc_filename(rawdata_filename):
     """Returns the filename for processed datafile."""
