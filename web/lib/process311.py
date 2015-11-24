@@ -42,7 +42,18 @@ def load_proc_data(procdata_filename):
     print str(time.time()-t0) + ' seconds elapsed'
     return df
 
+
 if __name__ == "__main__":
-	rawdata_filename = '/Users/walter/Data/SF/Case_Data_from_San_Francisco_311__SF311_2015-10-22.csv'
-	procdata_filename = make_proc_filename(rawdata_filename)
+	if len(sys.argv) < 2:
+		print(__doc__)
+		rawdata_filename = '/Users/walter/Data/SF/Case_Data_from_San_Francisco_311__SF311_2015-10-22.csv'
+	else:
+		try:
+			rawdata_filename = sys.argv[1]
+		except:
+			pass
+	
+	print "Default rawdata_filename set to:"
+	print rawdata_filename
+	# procdata_filename = make_proc_filename(rawdata_filename)
 
