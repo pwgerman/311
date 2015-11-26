@@ -61,7 +61,7 @@ def save_data(df, newfilename):
         df['Closed_dt']= df['Closed_dt'].astype('str')
 
     # then save
-    df.to_csv(path_or_buf=newfilename)
+    df.to_csv(path_or_buf=newfilename, index=False)
     return newfilename
 
 def process_timedelta(df):
