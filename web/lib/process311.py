@@ -24,7 +24,7 @@ def latest_file(path, selector):
     and that returns last in that list.  Intended to pick from many similar 
     files that differ by date appended to filename prefix."""
     filelist = os.listdir(path)
-    filelist = [file for file in filelist if file.startswith(selector)]
+    filelist = [file for file in filelist if file.startswith(selector) & (file.find('proc') < 0)]
     return max(filelist)
 
 def load_new_data(rawdata_filename, procdata_filename):
@@ -56,21 +56,24 @@ def load_proc_data(procdata_filename):
 
 
 if __name__ == "__main__":
-	if len(sys.argv) < 2:
-		print(__doc__)
+    if len(sys.argv) < 2:
+        print(__doc__)
         try:
             path = '/Users/walter/Data/SF'
-            selector = 'Case_Data_'
+            selector = 'Case_Data_from_San_Francisco_311__SF311'
             rawdata_filename = latest_file(path, selector)
         except:
             rawdata_filename = '/Users/walter/Data/SF/Case_Data_from_San_Francisco_311__SF311_2015-10-22.csv'
-	else:
-		try:
-			rawdata_filename = sys.argv[1]
-		except:
-			pass
-	
-	print "Default rawdata_filename set to:"
-	print rawdata_filename
-	# procdata_filename = make_proc_filename(rawdata_filename)
+    else:
+        try:
+            rawdata_filename = sys.argv[1]
+        except:
+            pass
+    
+    print "Default rawdata_filename set to:"
+    print rawdata_filename
+    procdata_filename = make_proc_filename(rawdata_filename)
+    print procdata_filename
+    load_new_data(rawdata_filename, procdata_filename)
+
 
