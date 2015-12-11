@@ -19,6 +19,10 @@ def root():
 def about():
     return render_template('about.html');
 
+@app.route('/browse')
+def browse():
+    return render_template('browse.html');
+
 @app.route('/insights')
 def get_insight():
     return render_template('insights.html');
