@@ -1,13 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
   <h1>San Francisco 311 Predictions Browser</h1>
+
+  <h3 class="bump-down">How to browse predictions:</h3>
+  <p>You can look at estimated times for completing cases by entering the case ID of a known case.  These can be found on the <a href="http://explore311.sfgov.org/main/category/">San Francisco 311 website</a> or use some suggestions here.</p>
+  <p>Some topics of interest can lead to interesting cases.</p>
+    <ul>
+    <li><a href="http://explore311.sfgov.org/main/All%2BAreas/Graffiti%2BPrivate%2BProperty/All%2BSubcategories/?date=Last-60-Days">Graffiti</a></li>
+    <li><a href="http://explore311.sfgov.org/main/All%2BAreas/Street%2Band%2BSidewalk%2BCleaning/All%2BSubcategories/?date=Last-60-Days">Street Cleaning</a></li>
+    <li><a href="http://explore311.sfgov.org/main/All%2BAreas/Damaged%2BProperty/All%2BSubcategories/?date=Last-60-Days">Property Damage</a></li>
+    <li><a href="http://explore311.sfgov.org/main/All%2BAreas/Abandoned%2BVehicle/All%2BSubcategories/?date=Last-60-Days">Abandoned Vehicle</a></li>
+  </ul>
+  <p>When you make a request of your own with San Francisco 311, record your request ID number, then come back here to check on how long you can expect before the request is fulfilled.</p>
+
   <p class="lead">How long will your ticket take to complete?  Let us guess.</p>
   <form action="/ticket" method="GET">
     <div class="form-group">
       <label for="case_id">Ticket Number</label>
-      <input type="text" class="form-control input-lg" size="10" name="case_id">
-      <span id="helpBlock" class="help-block">You should have received a case number from SF311 if you filed a ticket.  If you're interested in 311 predictions but don't have a case number to predict, check out our <a href="/browse">browse</a> page.</span>
+      <input type="text" class="form-control input-lg" size="10" name="case_id" placeholder="for example: 5361122">
+      <span id="helpBlock" class="help-block">You should have received a case number from SF311 if you filed a ticket.  If you're interested in 311 predictions but don't have a case number to predict, try one of these:
+        <ul>
+        <li>5361122</li>
+        <li>5361122</li>
+      </span>
     </div>
     <button type="submit" class="btn btn-lg btn-primary">Search</button>
   </form> 
+
 {% endblock %}
